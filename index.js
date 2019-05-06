@@ -9,13 +9,12 @@ client.on('ready', () => {
 
 client.on('message', msg => {
   if (isBotChannel(msg)) {
-    console.log("\n\n\n\n\n------")
+    console.log("------")
     let attachments = getAttachments(msg);
 
     if (attachments.length !== 0) {
       let attachmentURL = attachments[0].url;
-      console.log(attachmentURL);
-      // postToAppsScript(attachmentURL);
+      
       postToAppsScript(attachmentURL, function(data) {
         msg.reply(data);
       })
@@ -33,6 +32,7 @@ function getAttachments(msg) {
   return attachments;
 }
 function postToAppsScript(attachmentURL, cb) {
+  // I know... Nothing to be proud of here.
   const postContent = {
     entry: [
       {
